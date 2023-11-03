@@ -1,0 +1,49 @@
+"phenotype","risk_score","PRS_t","PRS_p","adj.r","adj.r_rs","anova_p","AIC","AIC_w_RS"
+"sqrt(tangles)","pLI (DEL)","1.39E+01","2.61E-40","2.22E-01","2.21E-01","5.72E-01","3185.81755214372","3188.82452603308"
+"sqrt(tangles)","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"sqrt(tangles)","LOEUF (DEL)","1.39E+01","2.61E-40","2.22E-01","2.23E-01","1.84E-01","3185.81755214372","3186.52274382441"
+"sqrt(tangles)","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"sqrt(tangles)","pHI","1.39E+01","2.61E-40","2.22E-01","2.21E-01","5.89E-01","3185.81755214372","3188.88437780858"
+"sqrt(tangles)","pTS",NA,NA,NA,NA,NA,NA,NA
+"sqrt(tangles)","pHI (binarized)","1.39E+01","2.61E-40","2.22E-01","2.23E-01","1.84E-01","3185.81755214372","3186.52119419425"
+"sqrt(tangles)","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
+"sqrt(amyloid)","pLI (DEL)","1.14E+01","3.32E-28","1.50E-01","1.50E-01","2.47E-01","2950.9169489779","2952.21634686264"
+"sqrt(amyloid)","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"sqrt(amyloid)","LOEUF (DEL)","1.14E+01","3.32E-28","1.50E-01","1.49E-01","5.48E-01","2950.9169489779","2953.83535110807"
+"sqrt(amyloid)","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"sqrt(amyloid)","pHI","1.14E+01","3.32E-28","1.50E-01","1.49E-01","4.28E-01","2950.9169489779","2953.33422598344"
+"sqrt(amyloid)","pTS",NA,NA,NA,NA,NA,NA,NA
+"sqrt(amyloid)","pHI (binarized)","1.14E+01","3.32E-28","1.50E-01","1.52E-01","8.23E-02","2950.9169489779","2949.97986727368"
+"sqrt(amyloid)","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
+"arteriol_scler","pLI (DEL)","2.52E+00","1.20E-02","4.22E-02","4.46E-02","1.05E-01","2713.74563604716","2713.29620686162"
+"arteriol_scler","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"arteriol_scler","LOEUF (DEL)","2.52E+00","1.20E-02","4.22E-02","4.57E-02","6.11E-02","2713.74563604716","2712.20200164387"
+"arteriol_scler","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"arteriol_scler","pHI","2.52E+00","1.20E-02","4.22E-02","4.63E-02","4.34E-02","2713.74563604716","2711.50564000134"
+"arteriol_scler","pTS",NA,NA,NA,NA,NA,NA,NA
+"arteriol_scler","pHI (binarized)","2.52E+00","1.20E-02","4.22E-02","4.44E-02","1.17E-01","2713.74563604716","2713.52289169457"
+"arteriol_scler","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
+"cvda_4gp2","pLI (DEL)","3.94E+00","8.60E-05","2.91E-02","4.60E-02","6.51E-05","2470.14184803094","2454.67378731497"
+"cvda_4gp2","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cvda_4gp2","LOEUF (DEL)","3.94E+00","8.60E-05","2.91E-02","4.70E-02","3.89E-05","2470.14184803094","2453.62577773126"
+"cvda_4gp2","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cvda_4gp2","pHI","3.94E+00","8.60E-05","2.91E-02","4.98E-02","9.10E-06","2470.14184803094","2450.66869899319"
+"cvda_4gp2","pTS",NA,NA,NA,NA,NA,NA,NA
+"cvda_4gp2","pHI (binarized)","3.94E+00","8.60E-05","2.91E-02","4.51E-02","1.03E-04","2470.14184803094","2455.61514765544"
+"cvda_4gp2","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
+"cogn_global","pLI (DEL)","-2.03E+01","5.71E-77","3.25E-01","3.24E-01","6.49E-01","2831.7927981832","2835.05600530736"
+"cogn_global","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cogn_global","LOEUF (DEL)","-2.03E+01","5.71E-77","3.25E-01","3.25E-01","4.30E-01","2831.7927981832","2834.21648902555"
+"cogn_global","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cogn_global","pHI","-2.03E+01","5.71E-77","3.25E-01","3.24E-01","6.42E-01","2831.7927981832","2835.0324279507"
+"cogn_global","pTS",NA,NA,NA,NA,NA,NA,NA
+"cogn_global","pHI (binarized)","-2.03E+01","5.71E-77","3.25E-01","3.24E-01","5.47E-01","2831.7927981832","2834.70842281736"
+"cogn_global","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
+"cogdx","pLI (DEL)","1.42E+01","1.39E-45","3.27E-01","3.28E-01","0.488003952172291","929.396854787435","931.961991238538"
+"cogdx","pLI (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cogdx","LOEUF (DEL)","1.42E+01","1.39E-45","3.27E-01","3.29E-01","0.434227006323495","929.396854787435","931.728479136269"
+"cogdx","LOEUF (DUP)",NA,NA,NA,NA,NA,NA,NA
+"cogdx","pHI","1.42E+01","1.39E-45","3.27E-01","3.28E-01","0.571895562161628","929.396854787435","932.279257011622"
+"cogdx","pTS",NA,NA,NA,NA,NA,NA,NA
+"cogdx","pHI (binarized)","1.42E+01","1.39E-45","3.27E-01","3.28E-01","0.689644377723618","929.396854787435","932.653696369723"
+"cogdx","pTS (binarized)",NA,NA,NA,NA,NA,NA,NA
