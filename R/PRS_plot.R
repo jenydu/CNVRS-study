@@ -1,3 +1,7 @@
+library(tidyr)
+library(ggplot2)
+library(reshape2)
+library(patchwork)
 
 fulltable <- read.csv('CNVRS_PRS_association_kunkle.csv', header = TRUE)
 
@@ -12,9 +16,7 @@ colnames(fulltable_subset) <- c("Phenotype",
                                 "AIC_PRS_LOAD_only_", "AIC_PRS_LOAD_RS_",
                                 "ANOVA_p_val")
 df <- aggregate(. ~ Phenotype, data = fulltable_subset, FUN = mean, na.action = na.omit)
-library(tidyr)
-library(ggplot2)
-library(reshape2)
+
 scitf_note <- function(num, digit) {
   # converts to scientific notation
   return (formatC(num, format = "e", digits = digit))
@@ -51,12 +53,7 @@ g<-ggplot(dfm, aes(x = Phenotype, y = value)) +
   labs(x = "Outcomes") +
   scale_y_continuous(limits = c(0, 0.4), name = "Adjusted R-Squared (Average of 4 Models)")
 
-
-
 g
-
-
-
 
 ##########
 
@@ -94,7 +91,6 @@ g2 <- ggplot(cogdx_avg, aes(x = Phenotype, y = value)) +
   scale_y_continuous(limits = c(0, 0.4), name = "Adjusted McFadden Pseudo R-Squared (Average of 4 Models)")
 
 g2
-library(patchwork)
 
 # Set the same y-axis limits for both plots
 y_limits <- c(0, 0.4)
