@@ -205,36 +205,36 @@ plot_m <- ggplot(data = p_t_val_m, aes(x=factor(risk_score, level = rs_order), y
   scale_fill_gradient2(low = "blue", high = "red", mid = "white",
                        midpoint = 0, limit = c(-4,4), space = "Lab", name="t-statistic") +
   theme_minimal()+
-  xlab('Risk Scores')+
-  ylab('')+
+  xlab('CNV-RS')+
+  ylab('Outcomes')+
   ggtitle('Male')+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))+
   # geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.3f", p_val)), ' ')),
   #           color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
   # geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(scientific(p_val, digits = 3)), "*"), ' '), fontface = 'bold'),
   #           color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
-  geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.2f", t_val)), ' ')),
-            color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
-  geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "*"), ' '), fontface = 'bold'),
-            color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
+  geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 ,  paste0(as.character(sprintf("%.2f", t_val)), "*"), ' ')),
+            color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
+  geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "**"), ' '), fontface = 'bold'),
+            color = "black", size = 4) + theme(axis.text.x = element_text(size = 8))
 
 plot_f <- ggplot(data = p_t_val_f, aes(x=factor(risk_score, level = rs_order), y=phenotype, fill=t_val)) +
   geom_tile(color = "white")+
   scale_fill_gradient2(low = "blue", high = "red", mid = "white",
                        midpoint = 0, limit = c(-4,4), space = "Lab", name="t-statistic") +
   theme_minimal()+
-  xlab('Risk Scores')+
-  ylab('')+
+  xlab('CNV-RS')+
+  ylab('Outcomes')+
   ggtitle('Female')+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))+
   # geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.3f", p_val)), ' ')),
   #           color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
   # geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(scientific(p_val, digits = 3)), "*"), ' '), fontface = 'bold'),
   #           color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
-  geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.2f", t_val)), ' ')),
-            color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
-  geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "*"), ' '), fontface = 'bold'),
-            color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
+  geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , paste0(as.character(sprintf("%.2f", t_val)), "*"), ' ')),
+            color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
+  geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "**"), ' '), fontface = 'bold'),
+            color = "black", size = 4) + theme(axis.text.x = element_text(size = 8))
 
 
 get_legend<-function(myggplot){

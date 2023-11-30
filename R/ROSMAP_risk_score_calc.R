@@ -387,7 +387,7 @@ pTS_thresh <- ggplot(TotScoreBySample, aes(x=pTS_thresh)) +
 grid.arrange(pli_del, pli_dup, loeuf_del, loeuf_dup, pHI, pTS, pHI_thresh, pTS_thresh, ncol=2)
 
 saveRDS(TotScoreBySample[complete.cases(TotScoreBySample), ], "data/TotScoreBySample.rds")
-
+# saveRDS(TotScoreBySample[complete.cases(TotScoreBySample), ], "data/TotScoreBySample_nocopynumber.rds")
 
 # # a small overlap test
 # a<-CNVcalls[which(CNVcalls$SVTYPE!="mCNV"),]

@@ -203,5 +203,5 @@ p_t_val_calculation <- function(scoreWithPheno, lst_risk_scores, str_scores,
 ######
 p_t_val <- p_t_val_calculation(scoreWithPheno, lst_risk_scores, str_scores,
                                lst_pheno_autop, lst_pheno_cog)
-
+p_t_val$PRS_p_fdr <- p.adjust(p_t_val$PRS_p)
 write.csv(p_t_val, 'output/CNVRS_ANOVA_updated.csv', row.names = FALSE)
