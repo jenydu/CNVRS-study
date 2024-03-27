@@ -237,8 +237,8 @@ get_legend<-function(myggplot){
 
 grid.arrange(plot_m, plot_f)
 g <- arrangeGrob(plot_m, plot_f)
-ggsave("output/sex_stratified.png", g, width = 22, height = 22, units = "cm")
-ggsave("output/sex_stratified.svg", g, width = 22, height = 22, units = "cm")
+ggsave("output_figs/sex_stratified.png", g, width = 22, height = 22, units = "cm")
+ggsave("output_figs/sex_stratified.svg", g, width = 22, height = 22, units = "cm")
 rm(plot_m,plot_f)
 
 p_t_val_f$phenotype = factor (p_t_val_f$phenotype)
@@ -345,6 +345,8 @@ sex_interactions_anova <- function(scoreWithPheno, lst_risk_scores,
 sex_int <- sex_interactions_anova(scoreWithPheno, lst_risk_scores,
                                   str_scores_interaction, str_scores,
                                   lst_pheno_autop, lst_pheno_cog)
+write.csv(sex_int, 'output_tables/sex_stratified_outputs.csv', row.names = FALSE)
+
 # https://stats.stackexchange.com/questions/331244/how-to-test-if-an-interaction-is-significant-interaction-terms-or-model-compari
 # https://bookdown.org/ndphillips/YaRrr/comparing-regression-models-with-anova.html
 

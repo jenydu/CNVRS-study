@@ -207,6 +207,6 @@ p_t_val$PRS_p_fdr <- p.adjust(p_t_val$PRS_p)
 
 p_t_val_filtered <- p_t_val %>%
   filter(!is.na(anova_p)) %>%
-  select(phenotype, adj.r, adj.r_rs, anova_p)
+  select(-c(risk_score, AIC, AIC_w_RS))
 
 write.csv(p_t_val_filtered, 'output_tables/CNVRS_ANOVA_updated.csv', row.names = FALSE)
