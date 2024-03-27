@@ -49,7 +49,7 @@ haplo_triplo <- readRDS("data/pHaplo_pTriplo_data.rds")
 colnames(haplo_triplo) <- c('gene', 'pHaplo', 'pTriplo')
 
 pli_loeuf <- readRDS("data/pLI_LOEUF_data.rds")
-pli_loeuf <- pli_loeuf[, c(1, 21, 30)]
+# pli_loeuf <- pli_loeuf[, c(1, 21, 30)]
 pli_loeuf$oe_lof_upper <- pli_loeuf$oe_lof_upper ** (-1)
 
 pHaploLst<-haplo_triplo
@@ -76,7 +76,6 @@ pTriplo_thresh[which(pTriplo_thresh$pTriplo >= thresh2),][2] <- 1
 rm(thresh1, thresh2)
 
 ############## gene count ################
-
 geneContentTable <- crossing(CNVcalls[,c(1,2,3,5)], VEP, .name_repair = "minimal")
 colnames(geneContentTable) <- c('CHROM.x', 'START.x', 'END.x', 'SVTYPE.x',
                                 'CHROM.y', 'START.y', 'END.y', 'SVTYPE.y', 'gene')
@@ -106,41 +105,40 @@ VEPinput <- CNVcalls[,c(1,2,3,5)]
 VEPinput <- VEPinput[which(VEPinput$SVTYPE!="mCNV"),]
 VEPinput$size <- VEPinput$END-VEPinput$START
 
-p2 <- ggplot() +
-  geom_histogram(VEPinput[which(VEPinput$SVTYPE=='DEL'),],
-                 mapping=aes(x = size,fill="a"),
-                 color="black") +
-  scale_x_log10() +
-  geom_histogram(VEPinput[which(VEPinput$SVTYPE=='DUP'),],
-                 mapping=aes(x = size,fill="b"),
-                 color="black") +
-  theme_bw() +
-  labs(tag = "A")+
-  ggtitle('Distribution of CNV Sizes') +
-  xlab("Size (# base pairs; log scale)") +
-  ylab("Number of CNVs") +
-  scale_fill_manual(name = NULL,
-                    values =c('a'="#4DBBD5CC",'b'="#F39B7FCC"),
-                    labels = c('DEL CNVs','DUP CNVs')) +
-  theme(legend.position = 'right')
-p2
-
 p1 <- ggplot() +
-  geom_bar(VEPinput, mapping=aes(x = CHROM, fill="a"),color="black") +
-  theme_bw() +
+  geom_bar(VEPinput, mapping = aes(x = CHROM, fill = "a"),
+           color = "black", size = 0.3, alpha = 0.7) +
+  geom_bar(data = CNV_pos, mapping = aes(x = CHROM, fill = "b"), color = "black",
+           alpha = 0.7, size = 0.3, position = 'dodge') +
+  scale_fill_manual(name = NULL, values = c('a' = "gold", 'b' = "forestgreen"),
+                    labels = c('All CNVs', 'Genic CNVs')) +
+  theme_bw() + labs(tag = "B") +
   scale_x_continuous(breaks = seq(1, 22, by = 1)) +
-  labs(tag = "B")+
   ggtitle('Distribution of CNVs Across Chromosomes') +
   xlab("Chromosome Number") +
   ylab("Number of CNVs (log scale)") +
-  geom_bar(data=CNV_pos, mapping=aes(x = CHROM, fill="b"), color="black", position = 'dodge') +
-  scale_y_log10() +
-  scale_fill_manual(name = NULL, values = c('a'="gold",'b'="forestgreen"),
-                    labels = c('All CNVs','Genic CNVs')) +
-  theme(legend.position = 'right')
-p1
-grid.arrange(p2, p1)
+  scale_y_log10() + theme(legend.position = 'right')
 
+p2 <- ggplot() +
+  geom_histogram(VEPinput[which(VEPinput$SVTYPE == 'DEL'), ],
+                 mapping = aes(x = size, fill = "a"),
+                 color = "black", alpha = 0.7, size = 0.3) +
+  geom_histogram(VEPinput[which(VEPinput$SVTYPE == 'DUP'), ],
+                 mapping = aes(x = size, fill = "b"),
+                 color = "black", alpha = 0.7, size = 0.3) +
+  scale_fill_manual(name = NULL, values = c('a' = "skyblue", 'b' = "darkgoldenrod1"),
+                    labels = c('DEL CNVs', 'DUP CNVs')) +
+  theme_bw() + scale_x_log10() +
+  labs(tag = "A") +
+  ggtitle('Distribution of CNV Sizes') +
+  xlab("Size (# base pairs; log scale)") +
+  ylab("Number of CNVs") +
+  theme(legend.position = 'right')
+
+combined_plot <- grid.arrange(p2, p1)
+combined_plot
+ggsave("output_figs/CNV_dist.png", combined_plot, width = 24, height = 20, units = "cm")
+ggsave("output_figs/CNV_dist.svg", combined_plot, width = 24, height = 20, units = "cm")
 rm(CNV_pos,VEPinput, p1, p2)
 ##############################################
 
@@ -343,49 +341,68 @@ TotScoreBySample[, 3:14] <- sapply(TotScoreBySample[, 3:14], as.double)
 #   geom_histogram(color="black", fill="lightblue") + theme_bw()
 # gcount_dup
 
-pli_del <- ggplot(TotScoreBySample, aes(x=pli_del)) +
-  geom_histogram(color="black", fill="skyblue") + theme_bw() +
+pli_del <- ggplot(TotScoreBySample, aes(x = pli_del)) +
+  geom_histogram(color = "black", fill = "skyblue") +
+  theme_bw() +
   xlab("pLI Score (DEL)") +
-  ylab("# CNVs") + scale_x_log10()
-
-pli_dup <- ggplot(TotScoreBySample, aes(x=pli_dup)) +
-  geom_histogram(color="black", fill="salmon") + theme_bw()+
-  ylab(" ")+
-  xlab("pLI Score (DUP)") + scale_x_log10()
-
-loeuf_del <- ggplot(TotScoreBySample, aes(x=loeuf_del)) +
-  geom_histogram(color="black", fill="skyblue") + theme_bw()+
-  xlab("LOEUF Score (DEL)") +
-  ylab("# CNVs")+scale_x_log10()
-
-loeuf_dup <- ggplot(TotScoreBySample, aes(x=loeuf_dup)) +
-  geom_histogram(color="black", fill="salmon") + theme_bw()+
-  xlab("LOEUF Score (DUP)") +
-  ylab(" ")+
+  ylab("# CNVs") +
   scale_x_log10()
 
-pHI <- ggplot(TotScoreBySample, aes(x=pHI)) +
-  geom_histogram(color="black", fill="skyblue") + theme_bw()+
+pli_dup <- ggplot(TotScoreBySample, aes(x = pli_dup)) +
+  geom_histogram(color = "black", fill = "salmon") +
+  theme_bw() +
+  ylab(" ") +
+  xlab("pLI Score (DUP)") +
+  scale_x_log10()
+
+loeuf_del <- ggplot(TotScoreBySample, aes(x = loeuf_del)) +
+  geom_histogram(color = "black", fill = "skyblue") +
+  theme_bw() +
+  xlab("LOEUF Score (DEL)") +
+  ylab("# CNVs") +
+  scale_x_log10()
+
+loeuf_dup <- ggplot(TotScoreBySample, aes(x = loeuf_dup)) +
+  geom_histogram(color = "black", fill = "salmon") +
+  theme_bw() +
+  xlab("LOEUF Score (DUP)") +
+  ylab(" ") +
+  scale_x_log10()
+
+pHI <- ggplot(TotScoreBySample, aes(x = pHI)) +
+  geom_histogram(color = "black", fill = "skyblue") +
+  theme_bw() +
   xlab("pHI Score") +
-  ylab("# CNVs")+ scale_x_log10()
+  ylab("# CNVs") +
+  scale_x_log10()
 
-pTS <- ggplot(TotScoreBySample, aes(x=pTS)) +
-  geom_histogram(color="black", fill="salmon") + theme_bw()+
-  ylab(" ")+
-  xlab("pTS Score") +scale_x_log10()
+pTS <- ggplot(TotScoreBySample, aes(x = pTS)) +
+  geom_histogram(color = "black", fill = "salmon") +
+  theme_bw() +
+  ylab(" ") +
+  xlab("pTS Score") +
+  scale_x_log10()
 
-pHI_thresh <- ggplot(TotScoreBySample, aes(x=pHI_thresh)) +
-  geom_histogram(color="black", fill="skyblue") + theme_bw()+
+pHI_thresh <- ggplot(TotScoreBySample, aes(x = pHI_thresh)) +
+  geom_histogram(color = "black", fill = "skyblue") +
+  theme_bw() +
   xlab("pHI Score (binarized)") +
-  ylab("# CNVs")+scale_x_log10()
+  ylab("# CNVs") +
+  scale_x_log10()
 
-pTS_thresh <- ggplot(TotScoreBySample, aes(x=pTS_thresh)) +
-  geom_histogram(color="black", fill="salmon") + theme_bw()+
-  ylab(" ")+
-  xlab("pTS Score (binarized)") +scale_x_log10()
+pTS_thresh <- ggplot(TotScoreBySample, aes(x = pTS_thresh)) +
+  geom_histogram(color = "black", fill = "salmon") +
+  theme_bw() +
+  ylab(" ") +
+  xlab("pTS Score (binarized)") +
+  scale_x_log10()
 
-grid.arrange(pli_del, pli_dup, loeuf_del, loeuf_dup, pHI, pTS, pHI_thresh, pTS_thresh, ncol=2)
+CNVRS_dist <- grid.arrange(pli_del, pli_dup, loeuf_del, loeuf_dup,
+                           pHI, pTS, pHI_thresh, pTS_thresh, ncol=2)
+ggsave("output_figs/CNVRS_dist.png", CNVRS_dist, width = 15, height = 20, units = "cm")
+ggsave("output_figs/CNVRS_dist.svg", CNVRS_dist, width = 15, height = 20, units = "cm")
 
+####
 saveRDS(TotScoreBySample[complete.cases(TotScoreBySample), ], "data/TotScoreBySample.rds")
 # saveRDS(TotScoreBySample[complete.cases(TotScoreBySample), ], "data/TotScoreBySample_nocopynumber.rds")
 

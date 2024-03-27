@@ -204,4 +204,9 @@ p_t_val_calculation <- function(scoreWithPheno, lst_risk_scores, str_scores,
 p_t_val <- p_t_val_calculation(scoreWithPheno, lst_risk_scores, str_scores,
                                lst_pheno_autop, lst_pheno_cog)
 p_t_val$PRS_p_fdr <- p.adjust(p_t_val$PRS_p)
-write.csv(p_t_val, 'output/CNVRS_ANOVA_updated.csv', row.names = FALSE)
+
+p_t_val_filtered <- p_t_val %>%
+  filter(!is.na(anova_p)) %>%
+  select(phenotype, adj.r, adj.r_rs, anova_p)
+
+write.csv(p_t_val_filtered, 'output_tables/CNVRS_ANOVA_updated.csv', row.names = FALSE)

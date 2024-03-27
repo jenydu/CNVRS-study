@@ -209,10 +209,6 @@ plot_m <- ggplot(data = p_t_val_m, aes(x=factor(risk_score, level = rs_order), y
   ylab('Outcomes')+
   ggtitle('Male')+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))+
-  # geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.3f", p_val)), ' ')),
-  #           color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
-  # geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(scientific(p_val, digits = 3)), "*"), ' '), fontface = 'bold'),
-  #           color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
   geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 ,  paste0(as.character(sprintf("%.2f", t_val)), "*"), ' ')),
             color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
   geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "**"), ' '), fontface = 'bold'),
@@ -227,15 +223,10 @@ plot_f <- ggplot(data = p_t_val_f, aes(x=factor(risk_score, level = rs_order), y
   ylab('Outcomes')+
   ggtitle('Female')+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, size = 12, hjust = 1))+
-  # geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , as.character(sprintf("%.3f", p_val)), ' ')),
-  #           color = "grey30", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
-  # geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(scientific(p_val, digits = 3)), "*"), ' '), fontface = 'bold'),
-  #           color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))
   geom_text(aes(risk_score, phenotype,label = if_else(p_val < 0.05 & p_val_adj >= 0.05 , paste0(as.character(sprintf("%.2f", t_val)), "*"), ' ')),
             color = "black", size = 3.5) + theme(axis.text.x = element_text(size = 8))+
   geom_text(aes(risk_score, phenotype,label = if_else(p_val_adj < 0.05, paste0(as.character(sprintf("%.2f", t_val)), "**"), ' '), fontface = 'bold'),
             color = "black", size = 4) + theme(axis.text.x = element_text(size = 8))
-
 
 get_legend<-function(myggplot){
   tmp <- ggplot_gtable(ggplot_build(myggplot))
@@ -247,6 +238,7 @@ get_legend<-function(myggplot){
 grid.arrange(plot_m, plot_f)
 g <- arrangeGrob(plot_m, plot_f)
 ggsave("output/sex_stratified.png", g, width = 22, height = 22, units = "cm")
+ggsave("output/sex_stratified.svg", g, width = 22, height = 22, units = "cm")
 rm(plot_m,plot_f)
 
 p_t_val_f$phenotype = factor (p_t_val_f$phenotype)

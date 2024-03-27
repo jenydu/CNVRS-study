@@ -15,6 +15,7 @@ colnames(fulltable_subset) <- c("Phenotype",
                                 "PRS-LOAD only", 'PRS-LOAD + CNV-RS1 + CNV-RS2',
                                 "AIC_PRS_LOAD_only_", "AIC_PRS_LOAD_RS_",
                                 "ANOVA_p_val")
+
 df <- aggregate(. ~ Phenotype, data = fulltable_subset, FUN = mean, na.action = na.omit)
 
 scitf_note <- function(num, digit) {
@@ -104,3 +105,4 @@ combined_plot <- g + g2 +
 combined_plot
 
 ggsave("output/PRS_interaction.png", combined_plot, width = 24, height = 18, units = "cm")
+ggsave("output/PRS_interaction.svg", combined_plot, width = 24, height = 18, units = "cm")
