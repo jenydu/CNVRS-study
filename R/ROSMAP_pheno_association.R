@@ -147,7 +147,7 @@ rename_mappings <- c(
   "loeuf_dup" = "LOEUF (DUP)",
 
   "sqrt(tangles)" = "Tangle Density\n(n=1001)",
-  "sqrt(amyloid)" = "Overall Amyloid Level\n(n=1005)",
+  "sqrt(amyloid)" = "Overall Amyloid Load\n(n=1005)",
   "cvda_4gp2" = "Cerebral Atherosclerosis\nRating\n(n=1004)",
   "cogn_global" = "Global Cognitive Function\n(n=1011)",
   "cogdx" = "Final Consensus\nCognitive Diagnosis\n(n=946)",
@@ -274,7 +274,7 @@ p3 <- ggplot(scoreWithPheno, aes(x = pTS_thresh, y = sqrt(amyloid))) +
   geom_smooth(method = lm) + theme_bw() +
   scale_x_continuous(breaks = seq(0, 10, by = 2)) +
   xlab('pTS Score (binarized)') +
-  ylab(paste0('Overall Amyloid Level'))
+  ylab(paste0('Overall Amyloid Load'))
 
 p4 <- ggplot(scoreWithPheno, aes(x = pTS, y = cogn_global)) +
   geom_point(size = 1, color = '#00000088', stroke = NA) +
